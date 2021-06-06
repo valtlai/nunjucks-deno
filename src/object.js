@@ -1,5 +1,5 @@
 // A simple class system, more documentation to come
-import EventEmitter from "events";
+import { EventEmitter } from "./deps.js";
 import * as lib from "./lib.js";
 
 function parentWrap(parent, prop) {

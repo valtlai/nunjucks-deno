@@ -1,9 +1,10 @@
-import fs from "fs";
-import path from "path";
+import { existsSync, path } from "./deps.js";
 import { _prettifyError } from "./lib.js";
 import compiler from "./compiler.js";
 import { Environment } from "./environment.js";
 import precompileGlobal from "./precompile_global.js";
+
+const readdirNamesSync = (p) => Deno.readdirSync(p).map((q) => q.name).sort();
 
 function match(filename, patterns) {
   if (!Array.isArray(patterns)) {
@@ -47,15 +48,15 @@ function precompile(input, opts) {
     return precompileString(input, opts);
   }
 
-  const pathStats = fs.existsSync(input) && fs.statSync(input);
+  const pathStats = existsSync(input) && Deno.statSync(input);
   const precompiled = [];
   const templates = [];
 
   function addTemplates(dir) {
-    fs.readdirSync(dir).forEach((file) => {
+    readdirNamesSync(dir).forEach((file) => {
       const filepath = path.join(dir, file);
       let subpath = filepath.substr(path.join(input, "/").length);
-      const stat = fs.statSync(filepath);
+      const stat = Deno.statSync(filepath);
 
       if (stat && stat.isDirectory()) {
         subpath += "/";
@@ -70,7 +71,7 @@ function precompile(input, opts) {
 
   if (pathStats.isFile()) {
     precompiled.push(_precompile(
-      fs.readFileSync(input, "utf-8"),
+      Deno.readTextFileSync(input),
       opts.name || input,
       env,
     ));
@@ -82,7 +83,7 @@ function precompile(input, opts) {
 
       try {
         precompiled.push(_precompile(
-          fs.readFileSync(templates[i], "utf-8"),
+          Deno.readTextFileSync(templates[i]),
           name,
           env,
         ));

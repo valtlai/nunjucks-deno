@@ -1,4 +1,4 @@
-import path from "path";
+import { path } from "./deps.js";
 import { EmitterObj } from "./object.js";
 
 export default class Loader extends EmitterObj {

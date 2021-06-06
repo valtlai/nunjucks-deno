@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import { existsSync, path } from "./deps.js";
 import Loader from "./loader.js";
 import { PrecompiledLoader } from "./precompiled_loader.js";
 let chokidar;
@@ -35,7 +34,7 @@ class FileSystemLoader extends Loader {
       } catch (e) {
         throw new Error("watch requires chokidar to be installed");
       }
-      const paths = this.searchPaths.filter(fs.existsSync);
+      const paths = this.searchPaths.filter(existsSync);
       const watcher = chokidar.watch(paths);
       watcher.on("all", (event, fullname) => {
         fullname = path.resolve(fullname);
@@ -59,7 +58,7 @@ class FileSystemLoader extends Loader {
 
       // Only allow the current directory and anything
       // underneath it to be searched
-      if (p.indexOf(basePath) === 0 && fs.existsSync(p)) {
+      if (p.indexOf(basePath) === 0 && existsSync(p)) {
         fullpath = p;
         break;
       }
@@ -72,7 +71,7 @@ class FileSystemLoader extends Loader {
     this.pathsToNames[fullpath] = name;
 
     const source = {
-      src: fs.readFileSync(fullpath, "utf-8"),
+      src: Deno.readTextFileSync(fullpath),
       path: fullpath,
       noCache: this.noCache,
     };
@@ -129,7 +128,7 @@ class NodeResolveLoader extends Loader {
     this.pathsToNames[fullpath] = name;
 
     const source = {
-      src: fs.readFileSync(fullpath, "utf-8"),
+      src: Deno.readTextFileSync(fullpath),
       path: fullpath,
       noCache: this.noCache,
     };

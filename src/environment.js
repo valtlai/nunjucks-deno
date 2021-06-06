@@ -1,5 +1,4 @@
-import asap from "asap";
-import waterfall from "a-sync-waterfall";
+import waterfall from "./waterfall.js";
 import * as lib from "./lib.js";
 import compiler from "./compiler.js";
 import filters from "./filters.js";
@@ -14,7 +13,7 @@ import expressApp from "./express_app.js";
 // If the user is using the async API, *always* call it
 // asynchronously even if the template was synchronous.
 function callbackAsap(cb, err, res) {
-  asap(() => {
+  queueMicrotask(() => {
     cb(err, res);
   });
 }

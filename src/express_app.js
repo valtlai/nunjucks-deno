@@ -1,4 +1,4 @@
-import path from "path";
+import { path } from "./deps.js";
 
 export default function express(env, app) {
   function NunjucksView(name, opts) {
