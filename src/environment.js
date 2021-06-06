@@ -2,7 +2,7 @@ import waterfall from "./waterfall.js";
 import * as lib from "./lib.js";
 import compiler from "./compiler.js";
 import filters from "./filters.js";
-import { FileSystemLoader, PrecompiledLoader, WebLoader } from "./loaders.js";
+import { FileSystemLoader, PrecompiledLoader } from "./loaders.js";
 import tests from "./tests.js";
 import globals from "./globals.js";
 import { EmitterObj, Obj } from "./object.js";
@@ -63,8 +63,6 @@ class Environment extends EmitterObj {
       // The filesystem loader is only available server-side
       if (FileSystemLoader) {
         this.loaders = [new FileSystemLoader("views")];
-      } else if (WebLoader) {
-        this.loaders = [new WebLoader("/views")];
       }
     } else {
       this.loaders = lib.isArray(loaders) ? loaders : [loaders];

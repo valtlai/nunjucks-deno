@@ -26,11 +26,6 @@ function configure(templatesPath, opts) {
       watch: opts.watch,
       noCache: opts.noCache,
     });
-  } else if (loaders.WebLoader) {
-    TemplateLoader = new loaders.WebLoader(templatesPath, {
-      useCache: opts.web && opts.web.useCache,
-      async: opts.web && opts.web.async,
-    });
   }
 
   e = new Environment(TemplateLoader, opts);
@@ -49,7 +44,6 @@ export default {
   FileSystemLoader: loaders.FileSystemLoader,
   NodeResolveLoader: loaders.NodeResolveLoader,
   PrecompiledLoader: loaders.PrecompiledLoader,
-  WebLoader: loaders.WebLoader,
   compiler: compiler,
   parser: parser,
   lexer: lexer,
