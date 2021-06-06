@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const Loader = require("./loader");
-const { PrecompiledLoader } = require("./precompiled_loader.js");
+import fs from "fs";
+import path from "path";
+import Loader from "./loader.js";
+import { PrecompiledLoader } from "./precompiled_loader.js";
 let chokidar;
 
 class FileSystemLoader extends Loader {
@@ -139,8 +139,4 @@ class NodeResolveLoader extends Loader {
   }
 }
 
-module.exports = {
-  FileSystemLoader: FileSystemLoader,
-  PrecompiledLoader: PrecompiledLoader,
-  NodeResolveLoader: NodeResolveLoader,
-};
+export { FileSystemLoader, NodeResolveLoader, PrecompiledLoader };

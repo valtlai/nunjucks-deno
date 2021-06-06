@@ -1,4 +1,4 @@
-var lib = require("./lib");
+import * as lib from "./lib.js";
 var arrayFrom = Array.from;
 var supportsIterators = (
   typeof Symbol === "function" && Symbol.iterator &&
@@ -355,24 +355,25 @@ function fromIterator(arr) {
   }
 }
 
-module.exports = {
-  Frame: Frame,
-  makeMacro: makeMacro,
-  makeKeywordArgs: makeKeywordArgs,
-  numArgs: numArgs,
-  suppressValue: suppressValue,
-  ensureDefined: ensureDefined,
-  memberLookup: memberLookup,
-  contextOrFrameLookup: contextOrFrameLookup,
-  callWrap: callWrap,
-  handleError: handleError,
-  isArray: lib.isArray,
-  keys: lib.keys,
-  SafeString: SafeString,
-  copySafeness: copySafeness,
-  markSafe: markSafe,
-  asyncEach: asyncEach,
-  asyncAll: asyncAll,
-  inOperator: lib.inOperator,
-  fromIterator: fromIterator,
+const { inOperator, isArray, keys } = lib;
+export {
+  asyncAll,
+  asyncEach,
+  callWrap,
+  contextOrFrameLookup,
+  copySafeness,
+  ensureDefined,
+  Frame,
+  fromIterator,
+  handleError,
+  inOperator,
+  isArray,
+  keys,
+  makeKeywordArgs,
+  makeMacro,
+  markSafe,
+  memberLookup,
+  numArgs,
+  SafeString,
+  suppressValue,
 };

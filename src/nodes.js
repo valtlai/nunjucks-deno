@@ -1,4 +1,4 @@
-const { Obj } = require("./object");
+import { Obj } from "./object.js";
 
 function traverseAndCheck(obj, type, results) {
   if (obj instanceof type) {
@@ -226,7 +226,7 @@ function printNodes(node, indent) {
   }
 }
 
-module.exports = {
+export default {
   Node: Node,
   Root: Root,
   NodeList: NodeList,

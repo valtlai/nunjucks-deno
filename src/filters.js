@@ -1,7 +1,8 @@
-var lib = require("./lib");
-var r = require("./runtime");
+import * as lib from "./lib.js";
+import * as r from "./runtime.js";
 
-var exports = module.exports = {};
+var exports = {};
+export default exports;
 
 function normalize(value, defaultValue) {
   if (value === null || value === undefined || value === false) {

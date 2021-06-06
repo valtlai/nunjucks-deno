@@ -1,9 +1,9 @@
-const parser = require("./parser");
-const transformer = require("./transformer");
-const nodes = require("./nodes");
-const { TemplateError } = require("./lib");
-const { Frame } = require("./runtime");
-const { Obj } = require("./object");
+import parser from "./parser.js";
+import transformer from "./transformer.js";
+import nodes from "./nodes.js";
+import { TemplateError } from "./lib.js";
+import { Frame } from "./runtime.js";
+import { Obj } from "./object.js";
 
 // These are all the same for now, but shouldn't be passed straight
 // through
@@ -1225,7 +1225,7 @@ class Compiler extends Obj {
   }
 }
 
-module.exports = {
+export default {
   compile: function compile(src, asyncFilters, extensions, name, opts = {}) {
     const c = new Compiler(name, opts.throwOnUndefined);
 

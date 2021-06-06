@@ -1,6 +1,6 @@
 // A simple class system, more documentation to come
-const EventEmitter = require("events");
-const lib = require("./lib");
+import EventEmitter from "events";
+import * as lib from "./lib.js";
 
 function parentWrap(parent, prop) {
   if (typeof parent !== "function" || typeof prop !== "function") {
@@ -80,4 +80,4 @@ class EmitterObj extends EventEmitter {
   }
 }
 
-module.exports = { Obj, EmitterObj };
+export { EmitterObj, Obj };

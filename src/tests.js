@@ -1,4 +1,7 @@
-var SafeString = require("./runtime").SafeString;
+import { SafeString } from "./runtime.js";
+
+const exports = {};
+export default exports;
 
 /**
  * Returns `true` if the object is a function, otherwise `false`.

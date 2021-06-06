@@ -1,15 +1,15 @@
-const asap = require("asap");
-const waterfall = require("a-sync-waterfall");
-const lib = require("./lib");
-const compiler = require("./compiler");
-const filters = require("./filters");
-const { FileSystemLoader, WebLoader, PrecompiledLoader } = require("./loaders");
-const tests = require("./tests");
-const globals = require("./globals");
-const { Obj, EmitterObj } = require("./object");
-const globalRuntime = require("./runtime");
+import asap from "asap";
+import waterfall from "a-sync-waterfall";
+import * as lib from "./lib.js";
+import compiler from "./compiler.js";
+import filters from "./filters.js";
+import { FileSystemLoader, PrecompiledLoader, WebLoader } from "./loaders.js";
+import tests from "./tests.js";
+import globals from "./globals.js";
+import { EmitterObj, Obj } from "./object.js";
+import * as globalRuntime from "./runtime.js";
 const { handleError, Frame } = globalRuntime;
-const expressApp = require("./express_app");
+import expressApp from "./express_app.js";
 
 // If the user is using the async API, *always* call it
 // asynchronously even if the template was synchronous.
@@ -592,7 +592,4 @@ class Template extends Obj {
   }
 }
 
-module.exports = {
-  Environment: Environment,
-  Template: Template,
-};
+export { Environment, Template };

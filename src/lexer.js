@@ -1,4 +1,4 @@
-const lib = require("./lib");
+import * as lib from "./lib.js";
 
 let whitespaceChars = " \n\t\r\u00A0";
 let delimChars = "()[]{}%*-+~/#,:|.<>=!";
@@ -526,7 +526,7 @@ class Tokenizer {
   }
 }
 
-module.exports = {
+export default {
   lex(src, opts) {
     return new Tokenizer(src, opts);
   },

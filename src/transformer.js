@@ -1,5 +1,5 @@
-var nodes = require("./nodes");
-var lib = require("./lib");
+import nodes from "./nodes.js";
+import * as lib from "./lib.js";
 
 var sym = 0;
 function gensym() {
@@ -229,6 +229,6 @@ function transform(ast, asyncFilters) {
 // var ast = transform(parser.parse(src, [new FooExtension()]), ['bar']);
 // nodes.printNodes(ast);
 
-module.exports = {
+export default {
   transform: transform,
 };

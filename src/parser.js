@@ -1,7 +1,7 @@
-var lexer = require("./lexer");
-var nodes = require("./nodes");
-var Obj = require("./object").Obj;
-var lib = require("./lib");
+import lexer from "./lexer.js";
+import nodes from "./nodes.js";
+import { Obj } from "./object.js";
+import * as lib from "./lib.js";
 
 class Parser extends Obj {
   init(tokens) {
@@ -1348,7 +1348,7 @@ class Parser extends Obj {
 // var n = p.parseAsRoot();
 // nodes.printNodes(n);
 
-module.exports = {
+export default {
   parse(src, extensions, opts) {
     var p = new Parser(lexer.lex(src, opts));
     if (extensions !== undefined) {

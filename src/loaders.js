@@ -1,3 +1,3 @@
 // This file will automatically be rewired to web-loader.js when
 // building for the browser
-module.exports = require("./node_loaders");
+export * from "./node_loaders.js";

@@ -1,14 +1,14 @@
-const lib = require("./src/lib");
-const { Environment, Template } = require("./src/environment");
-const Loader = require("./src/loader");
-const loaders = require("./src/loaders");
-const precompile = require("./src/precompile");
-const compiler = require("./src/compiler");
-const parser = require("./src/parser");
-const lexer = require("./src/lexer");
-const runtime = require("./src/runtime");
-const nodes = require("./src/nodes");
-const installJinjaCompat = require("./src/jinja_compat");
+import * as lib from "./src/lib.js";
+import { Environment, Template } from "./src/environment.js";
+import Loader from "./src/loader.js";
+import * as loaders from "./src/loaders.js";
+import precompile from "./src/precompile.js";
+import compiler from "./src/compiler.js";
+import parser from "./src/parser.js";
+import lexer from "./src/lexer.js";
+import * as runtime from "./src/runtime.js";
+import nodes from "./src/nodes.js";
+import installJinjaCompat from "./src/jinja_compat.js";
 
 // A single instance of an environment, since this is so commonly used
 let e;
@@ -42,7 +42,7 @@ function configure(templatesPath, opts) {
   return e;
 }
 
-module.exports = {
+export default {
   Environment: Environment,
   Template: Template,
   Loader: Loader,

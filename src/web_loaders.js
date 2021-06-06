@@ -1,5 +1,5 @@
-const Loader = require("./loader");
-const { PrecompiledLoader } = require("./precompiled_loader.js");
+import Loader from "./loader.js";
+import { PrecompiledLoader } from "./precompiled_loader.js";
 
 class WebLoader extends Loader {
   constructor(baseURL, opts) {
@@ -87,7 +87,7 @@ class WebLoader extends Loader {
   }
 }
 
-module.exports = {
+export default {
   WebLoader: WebLoader,
   PrecompiledLoader: PrecompiledLoader,
 };

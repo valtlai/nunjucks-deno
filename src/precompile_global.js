@@ -1,4 +1,4 @@
-function precompileGlobal(templates, opts) {
+export default function precompileGlobal(templates, opts) {
   var out = "";
   opts = opts || {};
 
@@ -19,5 +19,3 @@ function precompileGlobal(templates, opts) {
   }
   return out;
 }
-
-module.exports = precompileGlobal;

@@ -1,4 +1,4 @@
-function installCompat() {
+export default function installCompat() {
   // This must be called like `nunjucks.installCompat` so that `this`
   // references the nunjucks instance
   var runtime = this.runtime;
@@ -305,5 +305,3 @@ function installCompat() {
 
   return uninstall;
 }
-
-module.exports = installCompat;
