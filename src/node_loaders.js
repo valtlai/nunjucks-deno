@@ -1,7 +1,6 @@
 import { existsSync, path } from "./deps.js";
 import Loader from "./loader.js";
 import { PrecompiledLoader } from "./precompiled_loader.js";
-let chokidar;
 
 class FileSystemLoader extends Loader {
   constructor(searchPaths, opts) {
@@ -27,24 +26,9 @@ class FileSystemLoader extends Loader {
     }
 
     if (opts.watch) {
-      // Watch all the templates in the paths and fire an event when
-      // they change
-      try {
-        chokidar = require("chokidar");
-      } catch (e) {
-        throw new Error("watch requires chokidar to be installed");
-      }
-      const paths = this.searchPaths.filter(existsSync);
-      const watcher = chokidar.watch(paths);
-      watcher.on("all", (event, fullname) => {
-        fullname = path.resolve(fullname);
-        if (event === "change" && fullname in this.pathsToNames) {
-          this.emit("update", this.pathsToNames[fullname], fullname);
-        }
-      });
-      watcher.on("error", (error) => {
-        console.log("Watcher error: " + error);
-      });
+      throw new Error(
+        "The `watch` option is not supported by the Deno fork of Nunjucks",
+      );
     }
   }
 
@@ -88,23 +72,9 @@ class NodeResolveLoader extends Loader {
     this.noCache = !!opts.noCache;
 
     if (opts.watch) {
-      try {
-        chokidar = require("chokidar");
-      } catch (e) {
-        throw new Error("watch requires chokidar to be installed");
-      }
-      this.watcher = chokidar.watch();
-
-      this.watcher.on("change", (fullname) => {
-        this.emit("update", this.pathsToNames[fullname], fullname);
-      });
-      this.watcher.on("error", (error) => {
-        console.log("Watcher error: " + error);
-      });
-
-      this.on("load", (name, source) => {
-        this.watcher.add(source.path);
-      });
+      throw new Error(
+        "The `watch` option is not supported by the Deno fork of Nunjucks",
+      );
     }
   }
 
