@@ -2,7 +2,11 @@
  * Forked from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nunjucks
  */
 
-export type TemplateCallback<T> = (err: lib.TemplateError | null, res: T | null) => void;
+export type TemplateCallback<T> = (
+  err: lib.TemplateError | null,
+  res: T | null,
+) => void;
+
 export type Callback<E, T> = (err: E | null, res: T | null) => void;
 
 namespace Nunjucks {
@@ -13,43 +17,68 @@ namespace Nunjucks {
   }
 
   export class Environment {
-      options: {
-          autoescape: boolean;
-      };
+    options: {
+      autoescape: boolean;
+    };
 
-      constructor(loader?: ILoader | ILoader[] | null, opts?: ConfigureOptions);
-      render(name: string, context?: object): string;
-      render(name: string, context?: object, callback?: TemplateCallback<string>): void;
+    constructor(loader?: ILoader | ILoader[] | null, opts?: ConfigureOptions);
+    render(name: string, context?: object): string;
+    render(
+      name: string,
+      context?: object,
+      callback?: TemplateCallback<string>,
+    ): void;
 
-      renderString(name: string, context: object): string;
-      renderString(name: string, context: object, callback?: TemplateCallback<string>): void;
+    renderString(name: string, context: object): string;
+    renderString(
+      name: string,
+      context: object,
+      callback?: TemplateCallback<string>,
+    ): void;
 
-      addFilter(name: string, func: (...args: any[]) => any, async?: boolean): Environment;
-      getFilter(name: string): (...args: any[]) => any;
+    addFilter(
+      name: string,
+      func: (...args: any[]) => any,
+      async?: boolean,
+    ): Environment;
+    getFilter(name: string): (...args: any[]) => any;
 
-      addExtension(name: string, ext: Extension): Environment;
-      removeExtension(name: string): void;
-      getExtension(name: string): Extension;
-      hasExtension(name: string): boolean;
+    addExtension(name: string, ext: Extension): Environment;
+    removeExtension(name: string): void;
+    getExtension(name: string): Extension;
+    hasExtension(name: string): boolean;
 
-      addGlobal(name: string, value: any): Environment;
-      getGlobal(name: string): any;
+    addGlobal(name: string, value: any): Environment;
+    getGlobal(name: string): any;
 
-      getTemplate(name: string, eagerCompile?: boolean): Template;
-      getTemplate(name: string, eagerCompile?: boolean, callback?: Callback<Error, Template>): void;
+    getTemplate(name: string, eagerCompile?: boolean): Template;
+    getTemplate(
+      name: string,
+      eagerCompile?: boolean,
+      callback?: Callback<Error, Template>,
+    ): void;
 
-      express(app: object): void;
+    express(app: object): void;
 
-      on(
-          event: 'load',
-          fn: (name: string, source: { src: string; path: string; noCache: boolean }, loader: Loader) => void,
-      ): void;
+    on(
+      event: "load",
+      fn: (
+        name: string,
+        source: { src: string; path: string; noCache: boolean },
+        loader: Loader,
+      ) => void,
+    ): void;
   }
 
   export class Template {
-      constructor(src: string, env?: Environment, path?: string, eagerCompile?: boolean);
-      render(context?: object): string;
-      render(context?: object, callback?: TemplateCallback<string>): void;
+    constructor(
+      src: string,
+      env?: Environment,
+      path?: string,
+      eagerCompile?: boolean,
+    );
+    render(context?: object): string;
+    render(context?: object, callback?: TemplateCallback<string>): void;
   }
 
   export interface ILoader {
@@ -79,20 +108,29 @@ namespace Nunjucks {
     emit(name: string, ...args: any[]): void;
     resolve(from: string, to: string): string;
     isRelative(filename: string): boolean;
-    static extend<LoaderClass extends typeof Loader>(this: LoaderClass, toExtend: ILoader): LoaderClass;
+    static extend<LoaderClass extends typeof Loader>(
+      this: LoaderClass,
+      toExtend: ILoader,
+    ): LoaderClass;
   }
 
   export type FileSystemLoaderOptions = LoaderOptions;
 
   export class FileSystemLoader extends Loader implements ILoader {
-    constructor(searchPaths?: string | string[], opts?: FileSystemLoaderOptions);
+    constructor(
+      searchPaths?: string | string[],
+      opts?: FileSystemLoaderOptions,
+    );
     getSource(name: string): LoaderSource;
   }
 
   export type NodeResolveLoaderOptions = LoaderOptions;
 
   export class NodeResolveLoader extends Loader implements ILoader {
-    constructor(searchPaths?: string | string[], opts?: NodeResolveLoaderOptions);
+    constructor(
+      searchPaths?: string | string[],
+      opts?: NodeResolveLoaderOptions,
+    );
     getSource(name: string): LoaderSource;
   }
 
@@ -114,26 +152,26 @@ namespace Nunjucks {
   // }
 
   export namespace runtime {
-      class SafeString {
-          constructor(val: string);
-          val: string;
-          length: number;
-          valueOf(): string;
-          toString(): string;
-      }
+    class SafeString {
+      constructor(val: string);
+      val: string;
+      length: number;
+      valueOf(): string;
+      toString(): string;
+    }
   }
 
   export namespace lib {
     class TemplateError extends Error {
-        constructor(message: string, lineno: number, colno: number);
+      constructor(message: string, lineno: number, colno: number);
 
-        name: string; // always 'Template render error'
-        message: string;
-        stack: string;
+      name: string; // always 'Template render error'
+      message: string;
+      stack: string;
 
-        cause?: Error | undefined;
-        lineno: number;
-        colno: number;
+      cause?: Error | undefined;
+      lineno: number;
+      colno: number;
     }
   }
 
@@ -166,17 +204,39 @@ namespace Nunjucks {
   }
 
   export function configure(options: ConfigureOptions): Environment;
-  export function configure(path: string | string[], options?: ConfigureOptions): Environment;
+  export function configure(
+    path: string | string[],
+    options?: ConfigureOptions,
+  ): Environment;
 
   export function reset(): void;
 
-  export function compile(message: string, lineno: number, colno: number, eagerCompile?: boolean): Template;
+  export function compile(
+    message: string,
+    lineno: number,
+    colno: number,
+    eagerCompile?: boolean,
+  ): Template;
 
-  export function render(name: string, context?: Record<string, unknown>): string;
-  export function render(name: string, context?: Record<string, unknown>, callback?: TemplateCallback<string>): void;
+  export function render(
+    name: string,
+    context?: Record<string, unknown>,
+  ): string;
+  export function render(
+    name: string,
+    context?: Record<string, unknown>,
+    callback?: TemplateCallback<string>,
+  ): void;
 
-  export function renderString(src: string, context: Record<string, unknown>): string;
-  export function renderString(src: string, context: Record<string, unknown>, callback?: TemplateCallback<string>): void;
+  export function renderString(
+    src: string,
+    context: Record<string, unknown>,
+  ): string;
+  export function renderString(
+    src: string,
+    context: Record<string, unknown>,
+    callback?: TemplateCallback<string>,
+  ): void;
 
   export interface PrecompileOptions {
     name?: string | undefined;
@@ -185,12 +245,18 @@ namespace Nunjucks {
     env?: Environment | undefined;
     include?: string[] | undefined;
     exclude?: string[] | undefined;
-    wrapper?(templates: { name: string; template: string }, opts: PrecompileOptions): string;
+    wrapper?(
+      templates: { name: string; template: string },
+      opts: PrecompileOptions,
+    ): string;
   }
 
   export function precompile(path: string, opts?: PrecompileOptions): string;
 
-  export function precompileString(src: string, opts?: PrecompileOptions): string;
+  export function precompileString(
+    src: string,
+    opts?: PrecompileOptions,
+  ): string;
 }
 
-export default Nunjucks
+export default Nunjucks;
