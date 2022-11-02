@@ -27,7 +27,7 @@ class FileSystemLoader extends Loader {
 
     if (opts.watch) {
       throw new Error(
-        "The `watch` option is not supported by the Deno fork of Nunjucks",
+        "The `watch` option is not supported by the Deno port of Nunjucks",
       );
     }
   }
@@ -73,7 +73,7 @@ class NodeResolveLoader extends Loader {
 
     if (opts.watch) {
       throw new Error(
-        "The `watch` option is not supported by the Deno fork of Nunjucks",
+        "The `watch` option is not supported by the Deno port of Nunjucks",
       );
     }
   }
