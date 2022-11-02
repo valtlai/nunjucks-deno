@@ -1,8 +1,8 @@
 # Nunjucks for Deno
 
-**Nunjucks** is a full-featured templating engine for JavaScript. It’s heavily
-inspired by [Jinja&nbsp;2](https://jinja.palletsprojects.com/). View the
-[docs](https://mozilla.github.io/nunjucks/).
+**Nunjucks** is a full-featured templating engine for JavaScript.
+It’s heavily inspired by [Jinja&nbsp;2](https://jinja.palletsprojects.com/).
+View the [docs](https://mozilla.github.io/nunjucks/).
 
 🦕 This is a fork of [Nunjucks](https://github.com/mozilla/nunjucks) for Deno.
 

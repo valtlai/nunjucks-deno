@@ -1,5 +1,6 @@
 /**
- * Forked from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nunjucks
+ * Forked from
+ * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nunjucks
  */
 
 declare namespace Nunjucks {
@@ -12,7 +13,8 @@ declare namespace Nunjucks {
 
   export interface Extension {
     tags: string[];
-    // Parser API is undocumented it is suggested to check the source: https://github.com/mozilla/nunjucks/blob/master/src/parser.js
+    // Parser API is undocumented. It is suggested to check the source:
+    // https://github.com/mozilla/nunjucks/blob/master/src/parser.js
     parse(parser: any, nodes: any, lexer: any): any;
   }
 
@@ -94,10 +96,16 @@ declare namespace Nunjucks {
   }
 
   export interface LoaderOptions {
-    /** if true, the system will automatically update templates when they are changed on the filesystem */
+    /**
+     * If true, the system will automatically update templates
+     * when they are changed on the filesystem
+     */
     watch?: boolean;
 
-    /**  if true, the system will avoid using a cache and templates will be recompiled every single time */
+    /**
+     * If true, the system will avoid using a cache
+     * and templates will be recompiled every single time
+     */
     noCache?: boolean;
   }
 

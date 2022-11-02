@@ -12,9 +12,8 @@ export default function express(env, app) {
       );
     }
     if (!this.ext) {
-      this.name += (this.ext = (this.defaultEngine[0] !== "."
-        ? "."
-        : "") + this.defaultEngine);
+      this.name += this.ext = (this.defaultEngine[0] !== "." ? "." : "") +
+        this.defaultEngine;
     }
   }
 

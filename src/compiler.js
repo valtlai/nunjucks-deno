@@ -371,8 +371,9 @@ class Compiler extends Obj {
   compileIs(node, frame) {
     // first, we need to try to get the name of the test function, if it's a
     // callable (i.e., has args) and not a symbol.
-    var right = node.right.name ? node.right.name.value : // otherwise go with the symbol value
-      node.right.value;
+    var right = node.right.name
+      ? node.right.name.value // otherwise go with the symbol value
+      : node.right.value;
     this._emit('env.getTest("' + right + '").call(context, ');
     this.compile(node.left, frame);
     // compile the arguments for the callable if they exist

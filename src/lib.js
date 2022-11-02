@@ -76,7 +76,7 @@ export function TemplateError(message, lineno, colno) {
     }
   } else {
     const stack = (new Error(message)).stack;
-    getStack = (() => stack);
+    getStack = () => stack;
   }
 
   Object.defineProperty(err, "stack", {
