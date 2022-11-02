@@ -2,14 +2,14 @@
  * Forked from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nunjucks
  */
 
-export type TemplateCallback<T> = (
-  err: lib.TemplateError | null,
-  res: T | null,
-) => void;
+declare namespace Nunjucks {
+  export type TemplateCallback<T> = (
+    err: lib.TemplateError | null,
+    res: T | null,
+  ) => void;
 
-export type Callback<E, T> = (err: E | null, res: T | null) => void;
+  export type Callback<E, T> = (err: E | null, res: T | null) => void;
 
-namespace Nunjucks {
   export interface Extension {
     tags: string[];
     // Parser API is undocumented it is suggested to check the source: https://github.com/mozilla/nunjucks/blob/master/src/parser.js
