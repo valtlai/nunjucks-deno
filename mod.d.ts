@@ -170,7 +170,7 @@ namespace Nunjucks {
 
   export function reset(): void;
 
-  export function compile: (message: string, lineno: number, colno: number, eagerCompile?: boolean) => Template;
+  export function compile(message: string, lineno: number, colno: number, eagerCompile?: boolean): Template;
 
   export function render(name: string, context?: Record<string, unknown>): string;
   export function render(name: string, context?: Record<string, unknown>, callback?: TemplateCallback<string>): void;
