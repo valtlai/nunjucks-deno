@@ -1,3 +1,5 @@
+/// <reference types="./mod.d.ts" />
+
 import * as lib from "./src/lib.js";
 import { Environment, Template } from "./src/environment.js";
 import Loader from "./src/loader.js";
