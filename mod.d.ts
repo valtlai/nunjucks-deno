@@ -97,12 +97,6 @@ declare namespace Nunjucks {
 
   export interface LoaderOptions {
     /**
-     * If true, the system will automatically update templates
-     * when they are changed on the filesystem
-     */
-    watch?: boolean;
-
-    /**
      * If true, the system will avoid using a cache
      * and templates will be recompiled every single time
      */
@@ -194,12 +188,7 @@ declare namespace Nunjucks {
     throwOnUndefined?: boolean | undefined;
     trimBlocks?: boolean | undefined;
     lstripBlocks?: boolean | undefined;
-    watch?: boolean | undefined;
     noCache?: boolean | undefined;
-    web?: {
-      useCache?: boolean | undefined;
-      async?: boolean | undefined;
-    };
     express?: object | undefined;
     tags?: {
       blockStart?: string | undefined;
