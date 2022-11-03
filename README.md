@@ -14,5 +14,5 @@ View the [docs](https://mozilla.github.io/nunjucks/).
 Import the module:
 
 ```js
-import nunjucks from "https://deno.land/x/nunjucks@3.2.3-1/mod.js";
+import nunjucks from "https://deno.land/x/nunjucks@3.2.3-2/mod.js";
 ```
