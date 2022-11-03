@@ -234,7 +234,7 @@ export default {
   Literal,
   Symbol,
   Group,
-  Array,
+  Array: ArrayNode,
   Pair,
   Dict,
   Output,

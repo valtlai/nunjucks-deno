@@ -117,10 +117,7 @@ function _precompile(str, name, env) {
     throw _prettifyError(name, false, err);
   }
 
-  return {
-    name,
-    template,
-  };
+  return { name, template };
 }
 
 export default {
