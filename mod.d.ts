@@ -14,8 +14,8 @@ declare namespace Nunjucks {
   export interface Extension {
     tags: string[];
     // Parser API is undocumented. It is suggested to check the source:
-    // https://github.com/mozilla/nunjucks/blob/master/src/parser.js
     parse(parser: any, nodes: any, lexer: any): any;
+    // https://github.com/mozilla/nunjucks/blob/master/nunjucks/src/parser.js
   }
 
   export class Environment {

@@ -567,9 +567,9 @@ function urlencode(obj) {
 exports.urlencode = urlencode;
 
 // For the jinja regexp, see
-// https://github.com/mitsuhiko/jinja2/blob/f15b814dcba6aa12bc74d1f7d0c881d55f7126be/jinja2/utils.py#L20-L23
+// https://github.com/pallets/jinja/blob/f15b814dcba6aa12bc74d1f7d0c881d55f7126be/jinja2/utils.py#L20-L23
 const puncRe = /^(?:\(|<|&lt;)?(.*?)(?:\.|,|\)|\n|&gt;)?$/;
-// from http://blog.gerv.net/2011/05/html5_email_address_regexp/
+// From https://blog.gerv.net/2011/05/html5_email_address_regexp/
 const emailRe = /^[\w.!#$%&'*+\-\/=?\^`{|}~]+@[a-z\d\-]+(\.[a-z\d\-]+)+$/i;
 const httpHttpsRe = /^https?:\/\/.*$/;
 const wwwRe = /^www\./;

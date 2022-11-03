@@ -9,7 +9,7 @@ class FileSystemLoader extends Loader {
       console.log(
         "[nunjucks] Warning: you passed a boolean as the second " +
           "argument to FileSystemLoader, but it now takes an options " +
-          "object. See http://mozilla.github.io/nunjucks/api.html#filesystemloader",
+          "object. See https://mozilla.github.io/nunjucks/api.html#filesystemloader",
       );
     }
 

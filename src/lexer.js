@@ -139,7 +139,8 @@ class Tokenizer {
         }
 
         // Check for flags.
-        // The possible flags are according to https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+        // The possible flags are according to
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
         const POSSIBLE_FLAGS = ["g", "i", "m", "y"];
         let regexFlags = "";
         while (!this.isFinished()) {
