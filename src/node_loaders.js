@@ -91,7 +91,7 @@ class NodeResolveLoader extends Loader {
 
     try {
       fullpath = require.resolve(name);
-    } catch (_) {
+    } catch {
       return null;
     }
 

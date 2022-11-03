@@ -40,20 +40,20 @@ function configure(templatesPath, opts) {
 }
 
 export default {
-  Environment: Environment,
-  Template: Template,
-  Loader: Loader,
+  Environment,
+  Template,
+  Loader,
   FileSystemLoader: loaders.FileSystemLoader,
   NodeResolveLoader: loaders.NodeResolveLoader,
   PrecompiledLoader: loaders.PrecompiledLoader,
-  compiler: compiler,
-  parser: parser,
-  lexer: lexer,
-  runtime: runtime,
-  lib: lib,
-  nodes: nodes,
-  installJinjaCompat: installJinjaCompat,
-  configure: configure,
+  compiler,
+  parser,
+  lexer,
+  runtime,
+  lib,
+  nodes,
+  installJinjaCompat,
+  configure,
   reset() {
     e = undefined;
   },

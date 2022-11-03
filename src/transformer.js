@@ -230,5 +230,5 @@ function transform(ast, asyncFilters) {
 // nodes.printNodes(ast);
 
 export default {
-  transform: transform,
+  transform,
 };

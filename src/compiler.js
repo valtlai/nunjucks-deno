@@ -1247,5 +1247,5 @@ export default {
     return c.getCode();
   },
 
-  Compiler: Compiler,
+  Compiler,
 };

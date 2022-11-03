@@ -118,12 +118,12 @@ function _precompile(str, name, env) {
   }
 
   return {
-    name: name,
-    template: template,
+    name,
+    template,
   };
 }
 
 export default {
-  precompile: precompile,
-  precompileString: precompileString,
+  precompile,
+  precompileString,
 };

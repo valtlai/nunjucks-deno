@@ -1356,5 +1356,5 @@ export default {
     }
     return p.parseAsRoot();
   },
-  Parser: Parser,
+  Parser,
 };
