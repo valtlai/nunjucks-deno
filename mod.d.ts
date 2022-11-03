@@ -24,17 +24,17 @@ declare namespace Nunjucks {
     };
 
     constructor(loader?: ILoader | ILoader[] | null, opts?: ConfigureOptions);
-    render(name: string, context?: object): string;
+    render(name: string, context?: Record<string, unknown>): string;
     render(
       name: string,
-      context?: object,
+      context?: Record<string, unknown>,
       callback?: TemplateCallback<string>,
     ): void;
 
-    renderString(name: string, context: object): string;
+    renderString(name: string, context: Record<string, unknown>): string;
     renderString(
       name: string,
-      context: object,
+      context: Record<string, unknown>,
       callback?: TemplateCallback<string>,
     ): void;
 
@@ -60,7 +60,7 @@ declare namespace Nunjucks {
       callback?: Callback<Error, Template>,
     ): void;
 
-    express(app: object): void;
+    express(app: Record<string, unknown>): void;
 
     on(
       event: "load",
@@ -79,12 +79,15 @@ declare namespace Nunjucks {
       path?: string,
       eagerCompile?: boolean,
     );
-    render(context?: object): string;
-    render(context?: object, callback?: TemplateCallback<string>): void;
+    render(context?: Record<string, unknown>): string;
+    render(
+      context?: Record<string, unknown>,
+      callback?: TemplateCallback<string>,
+    ): void;
   }
 
   export interface ILoader {
-    async?: boolean | undefined;
+    async?: boolean;
     getSource(name: string): LoaderSource;
     getSource(name: string, callback: Callback<Error, LoaderSource>): void;
   }
@@ -171,7 +174,7 @@ declare namespace Nunjucks {
       message: string;
       stack: string;
 
-      cause?: Error | undefined;
+      cause?: Error;
       lineno: number;
       colno: number;
     }
@@ -184,19 +187,19 @@ declare namespace Nunjucks {
   export function installJinjaCompat(): void;
 
   export interface ConfigureOptions {
-    autoescape?: boolean | undefined;
-    throwOnUndefined?: boolean | undefined;
-    trimBlocks?: boolean | undefined;
-    lstripBlocks?: boolean | undefined;
-    noCache?: boolean | undefined;
-    express?: object | undefined;
+    autoescape?: boolean;
+    throwOnUndefined?: boolean;
+    trimBlocks?: boolean;
+    lstripBlocks?: boolean;
+    noCache?: boolean;
+    express?: Record<string, unknown>;
     tags?: {
-      blockStart?: string | undefined;
-      blockEnd?: string | undefined;
-      variableStart?: string | undefined;
-      variableEnd?: string | undefined;
-      commentStart?: string | undefined;
-      commentEnd?: string | undefined;
+      blockStart?: string;
+      blockEnd?: string;
+      variableStart?: string;
+      variableEnd?: string;
+      commentStart?: string;
+      commentEnd?: string;
     };
   }
 
@@ -236,12 +239,12 @@ declare namespace Nunjucks {
   ): void;
 
   export interface PrecompileOptions {
-    name?: string | undefined;
-    asFunction?: boolean | undefined;
-    force?: boolean | undefined;
-    env?: Environment | undefined;
-    include?: string[] | undefined;
-    exclude?: string[] | undefined;
+    name?: string;
+    asFunction?: boolean;
+    force?: boolean;
+    env?: Environment;
+    include?: string[];
+    exclude?: string[];
     wrapper?(
       templates: { name: string; template: string },
       opts: PrecompileOptions,
