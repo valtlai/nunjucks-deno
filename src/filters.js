@@ -1,7 +1,7 @@
 import * as lib from "./lib.js";
 import * as r from "./runtime.js";
 
-var exports = {};
+const exports = {};
 export default exports;
 
 function normalize(value, defaultValue) {
@@ -18,9 +18,9 @@ function isNaN(num) {
 }
 
 function batch(arr, linecount, fillWith) {
-  var i;
-  var res = [];
-  var tmp = [];
+  let i;
+  const res = [];
+  let tmp = [];
 
   for (i = 0; i < arr.length; i++) {
     if (i % linecount === 0 && tmp.length) {
@@ -86,9 +86,9 @@ function dictsort(val, caseSensitive, by) {
     throw new lib.TemplateError("dictsort filter: val must be an object");
   }
 
-  let array = [];
+  const array = [];
   // deliberately include properties from the object's prototype
-  for (let k in val) {
+  for (const k in val) {
     array.push([k, val[k]]);
   }
 
@@ -104,8 +104,8 @@ function dictsort(val, caseSensitive, by) {
   }
 
   array.sort((t1, t2) => {
-    var a = t1[si];
-    var b = t2[si];
+    let a = t1[si];
+    let b = t2[si];
 
     if (!caseSensitive) {
       if (lib.isString(a)) {
@@ -209,7 +209,7 @@ function last(arr) {
 exports.last = last;
 
 function lengthFilter(val) {
-  var value = normalize(val, "");
+  const value = normalize(val, "");
 
   if (value !== undefined) {
     if (
@@ -302,7 +302,7 @@ function selectattr(arr, attr) {
 exports.selectattr = selectattr;
 
 function replace(str, old, new_, maxCount) {
-  var originalStr = str;
+  const originalStr = str;
 
   if (old instanceof RegExp) {
     return str.replace(old, new_);
@@ -374,7 +374,7 @@ function replace(str, old, new_, maxCount) {
 exports.replace = replace;
 
 function reverse(val) {
-  var arr;
+  let arr;
   if (lib.isString(val)) {
     arr = list(val);
   } else {
@@ -450,8 +450,8 @@ exports.sort = r.makeMacro(
   [],
   function sortFilter(arr, reversed, caseSens, attr) {
     // Copy it
-    let array = lib.map(arr, (v) => v);
-    let getAttribute = lib.getAttrGetter(attr);
+    const array = lib.map(arr, (v) => v);
+    const getAttribute = lib.getAttrGetter(attr);
 
     array.sort((a, b) => {
       let x = (attr) ? getAttribute(a) : a;
@@ -490,8 +490,8 @@ exports.string = string;
 
 function striptags(input, preserveLinebreaks) {
   input = normalize(input, "");
-  let tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>|<!--[\s\S]*?-->/gi;
-  let trimmedInput = trim(input.replace(tags, ""));
+  const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>|<!--[\s\S]*?-->/gi;
+  const trimmedInput = trim(input.replace(tags, ""));
   let res = "";
   if (preserveLinebreaks) {
     res = trimmedInput
@@ -509,7 +509,7 @@ exports.striptags = striptags;
 
 function title(str) {
   str = normalize(str, "");
-  let words = str.split(" ").map((word) => capitalize(word));
+  const words = str.split(" ").map((word) => capitalize(word));
   return r.copySafeness(str, words.join(" "));
 }
 
@@ -522,7 +522,7 @@ function trim(str) {
 exports.trim = trim;
 
 function truncate(input, length, killwords, end) {
-  var orig = input;
+  const orig = input;
   input = normalize(input, "");
   length = length || 255;
 
@@ -555,11 +555,11 @@ function upper(str) {
 exports.upper = upper;
 
 function urlencode(obj) {
-  var enc = encodeURIComponent;
+  const enc = encodeURIComponent;
   if (lib.isString(obj)) {
     return enc(obj);
   } else {
-    let keyvals = (lib.isArray(obj)) ? obj : lib._entries(obj);
+    const keyvals = (lib.isArray(obj)) ? obj : lib._entries(obj);
     return keyvals.map(([k, v]) => `${enc(k)}=${enc(v)}`).join("&");
   }
 }
@@ -587,9 +587,9 @@ function urlize(str, length, nofollow) {
     // trailing whitespace.
     return word && word.length;
   }).map((word) => {
-    var matches = word.match(puncRe);
-    var possibleUrl = (matches) ? matches[1] : word;
-    var shortUrl = possibleUrl.substr(0, length);
+    const matches = word.match(puncRe);
+    const possibleUrl = (matches) ? matches[1] : word;
+    const shortUrl = possibleUrl.substr(0, length);
 
     // url that starts with http or https
     if (httpHttpsRe.test(possibleUrl)) {
@@ -628,7 +628,7 @@ function wordcount(str) {
 exports.wordcount = wordcount;
 
 function float(val, def) {
-  var res = parseFloat(val);
+  const res = parseFloat(val);
   return (isNaN(res)) ? def : res;
 }
 
@@ -638,7 +638,7 @@ const intFilter = r.makeMacro(
   ["value", "default", "base"],
   [],
   function doInt(value, defaultValue, base = 10) {
-    var res = parseInt(value, base);
+    const res = parseInt(value, base);
     return (isNaN(res)) ? defaultValue : res;
   },
 );

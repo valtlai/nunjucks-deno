@@ -1,14 +1,14 @@
 import nodes from "./nodes.js";
 import * as lib from "./lib.js";
 
-var sym = 0;
+let sym = 0;
 function gensym() {
   return "hole_" + sym++;
 }
 
 // copy-on-write version of map
 function mapCOW(arr, func) {
-  var res = null;
+  let res = null;
   for (let i = 0; i < arr.length; i++) {
     const item = func(arr[i]);
 
@@ -76,9 +76,9 @@ function depthWalk(ast, func) {
 }
 
 function _liftFilters(node, asyncFilters, prop) {
-  var children = [];
+  const children = [];
 
-  var walked = depthWalk(prop ? node[prop] : node, (descNode) => {
+  const walked = depthWalk(prop ? node[prop] : node, (descNode) => {
     let symbol;
     if (descNode instanceof nodes.Block) {
       return descNode;

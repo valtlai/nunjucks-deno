@@ -24,7 +24,7 @@ function callbackAsap(cb, err, res) {
 const noopTmplSrc = {
   type: "code",
   obj: {
-    root(env, context, frame, runtime, cb) {
+    root(_0, _1, _2, _3, cb) {
       try {
         cb(null, "");
       } catch (e) {
@@ -122,7 +122,7 @@ class Environment extends EmitterObj {
   }
 
   removeExtension(name) {
-    var extension = this.getExtension(name);
+    const extension = this.getExtension(name);
     if (!extension) {
       return;
     }
@@ -152,7 +152,7 @@ class Environment extends EmitterObj {
   }
 
   addFilter(name, func, async) {
-    var wrapped = func;
+    const wrapped = func;
 
     if (async) {
       this.asyncFilters.push(name);
@@ -181,7 +181,7 @@ class Environment extends EmitterObj {
   }
 
   resolveTemplate(loader, parentName, filename) {
-    var isRelative = (loader.isRelative && parentName)
+    const isRelative = (loader.isRelative && parentName)
       ? loader.isRelative(filename)
       : false;
     return (isRelative && loader.resolve)
@@ -190,8 +190,8 @@ class Environment extends EmitterObj {
   }
 
   getTemplate(name, eagerCompile, parentName, ignoreMissing, cb) {
-    var that = this;
-    var tmpl = null;
+    const that = this;
+    let tmpl = null;
     if (name && name.raw) {
       // this fixes autoescape for templates referenced in symbols
       name = name.raw;
@@ -265,7 +265,7 @@ class Environment extends EmitterObj {
       }
     };
 
-    lib.asyncIter(this.loaders, (loader, i, next, done) => {
+    lib.asyncIter(this.loaders, (loader, _, next, done) => {
       function handle(err, src) {
         if (err) {
           done(err);
@@ -384,9 +384,9 @@ class Context extends Obj {
   }
 
   getSuper(env, name, block, frame, runtime, cb) {
-    var idx = lib.indexOf(this.blocks[name] || [], block);
-    var blk = this.blocks[name][idx + 1];
-    var context = this;
+    const idx = lib.indexOf(this.blocks[name] || [], block);
+    const blk = this.blocks[name][idx + 1];
+    const context = this;
 
     if (idx === -1 || !blk) {
       throw new Error('no super block available for "' + name + '"');
@@ -400,7 +400,7 @@ class Context extends Obj {
   }
 
   getExported() {
-    var exported = {};
+    const exported = {};
     this.exported.forEach((name) => {
       exported[name] = this.ctx[name];
     });
@@ -554,7 +554,7 @@ class Template extends Obj {
   }
 
   _compile() {
-    var props;
+    let props;
 
     if (this.tmplProps) {
       props = this.tmplProps;
@@ -577,7 +577,7 @@ class Template extends Obj {
   }
 
   _getBlocks(props) {
-    var blocks = {};
+    const blocks = {};
 
     lib.keys(props).forEach((k) => {
       if (k.slice(0, 2) === "b_") {

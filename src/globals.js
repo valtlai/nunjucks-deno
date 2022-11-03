@@ -1,5 +1,5 @@
 function cycler(items) {
-  var index = -1;
+  let index = -1;
 
   return {
     current: null,

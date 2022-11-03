@@ -1,18 +1,18 @@
 export default function installCompat() {
   // This must be called like `nunjucks.installCompat` so that `this`
   // references the nunjucks instance
-  var runtime = this.runtime;
-  var lib = this.lib;
+  const runtime = this.runtime;
+  const lib = this.lib;
   // Handle slim case where these 'modules' are excluded from the built source
-  var Compiler = this.compiler.Compiler;
-  var Parser = this.parser.Parser;
-  var nodes = this.nodes;
-  var lexer = this.lexer;
+  const Compiler = this.compiler.Compiler;
+  const Parser = this.parser.Parser;
+  const nodes = this.nodes;
+  const lexer = this.lexer;
 
-  var orig_contextOrFrameLookup = runtime.contextOrFrameLookup;
-  var orig_memberLookup = runtime.memberLookup;
-  var orig_Compiler_assertType;
-  var orig_Parser_parseAggregate;
+  const orig_contextOrFrameLookup = runtime.contextOrFrameLookup;
+  const orig_memberLookup = runtime.memberLookup;
+  let orig_Compiler_assertType;
+  let orig_Parser_parseAggregate;
   if (Compiler) {
     orig_Compiler_assertType = Compiler.prototype.assertType;
   }
@@ -31,12 +31,8 @@ export default function installCompat() {
     }
   }
 
-  runtime.contextOrFrameLookup = function contextOrFrameLookup(
-    context,
-    frame,
-    key,
-  ) {
-    var val = orig_contextOrFrameLookup.apply(this, arguments);
+  runtime.contextOrFrameLookup = function contextOrFrameLookup(_0, _1, key) {
+    const val = orig_contextOrFrameLookup.apply(this, arguments);
     if (val !== undefined) {
       return val;
     }
@@ -88,7 +84,7 @@ export default function installCompat() {
     };
 
     Parser.prototype.parseAggregate = function parseAggregate() {
-      var origState = getTokensState(this.tokens);
+      const origState = getTokensState(this.tokens);
       // Set back one accounting for opening bracket/parens
       origState.colno--;
       origState.index--;
@@ -207,7 +203,7 @@ export default function installCompat() {
       throw new Error("ValueError");
     },
     count(element) {
-      var count = 0;
+      let count = 0;
       for (let i = 0; i < this.length; i++) {
         if (this[i] === element) {
           count++;
@@ -216,7 +212,7 @@ export default function installCompat() {
       return count;
     },
     index(element) {
-      var i;
+      let i;
       if ((i = this.indexOf(element)) === -1) {
         throw new Error("ValueError");
       }
@@ -240,7 +236,7 @@ export default function installCompat() {
       return lib.keys(this);
     },
     get(key, def) {
-      var output = this[key];
+      let output = this[key];
       if (output === undefined) {
         output = def;
       }
@@ -250,7 +246,7 @@ export default function installCompat() {
       return hasOwnProp(this, key);
     },
     pop(key, def) {
-      var output = this[key];
+      let output = this[key];
       if (output === undefined && def !== undefined) {
         output = def;
       } else if (output === undefined) {
@@ -285,7 +281,7 @@ export default function installCompat() {
   OBJECT_MEMBERS.itervalues = OBJECT_MEMBERS.values;
   OBJECT_MEMBERS.iterkeys = OBJECT_MEMBERS.keys;
 
-  runtime.memberLookup = function memberLookup(obj, val, autoescape) {
+  runtime.memberLookup = function memberLookup(obj, val) {
     if (arguments.length === 4) {
       return sliceLookup.apply(this, arguments);
     }

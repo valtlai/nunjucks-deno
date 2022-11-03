@@ -1,7 +1,7 @@
-var ArrayProto = Array.prototype;
-var ObjProto = Object.prototype;
+const ArrayProto = Array.prototype;
+const ObjProto = Object.prototype;
 
-var escapeMap = {
+const escapeMap = {
   "&": "&amp;",
   '"': "&quot;",
   "'": "&#39;",
@@ -9,7 +9,7 @@ var escapeMap = {
   ">": "&gt;",
 };
 
-var escapeRegex = /[&"'<>]/g;
+const escapeRegex = /[&"'<>]/g;
 
 export function hasOwnProp(obj, k) {
   return ObjProto.hasOwnProperty.call(obj, k);
@@ -37,8 +37,8 @@ export function _prettifyError(path, withInternals, err) {
 }
 
 export function TemplateError(message, lineno, colno) {
-  var err;
-  var cause;
+  let err;
+  let cause;
 
   if (message instanceof Error) {
     cause = message;
@@ -226,7 +226,7 @@ export function without(array) {
 }
 
 export function repeat(char_, n) {
-  var str = "";
+  let str = "";
   for (let i = 0; i < n; i++) {
     str += char_;
   }
@@ -248,7 +248,7 @@ export function each(obj, func, context) {
 }
 
 export function map(obj, func) {
-  var results = [];
+  const results = [];
   if (obj == null) {
     return results;
   }
@@ -309,7 +309,7 @@ export function indexOf(arr, searchElement, fromIndex) {
 
 function keys_(obj) {
   const arr = [];
-  for (let k in obj) {
+  for (const k in obj) {
     if (hasOwnProp(obj, k)) {
       arr.push(k);
     }

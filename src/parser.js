@@ -14,7 +14,7 @@ class Parser extends Obj {
   }
 
   nextToken(withWhitespace) {
-    var tok;
+    let tok;
 
     if (this.peeked) {
       if (!withWhitespace && this.peeked.type === lexer.TOKEN_WHITESPACE) {
@@ -69,7 +69,7 @@ class Parser extends Obj {
   }
 
   skip(type) {
-    var tok = this.nextToken();
+    const tok = this.nextToken();
     if (!tok || tok.type !== type) {
       this.pushToken(tok);
       return false;
@@ -78,7 +78,7 @@ class Parser extends Obj {
   }
 
   expect(type) {
-    var tok = this.nextToken();
+    const tok = this.nextToken();
     if (tok.type !== type) {
       this.fail(
         "expected " + type + ", got " + tok.type,
@@ -90,7 +90,7 @@ class Parser extends Obj {
   }
 
   skipValue(type, val) {
-    var tok = this.nextToken();
+    const tok = this.nextToken();
     if (!tok || tok.type !== type || tok.value !== val) {
       this.pushToken(tok);
       return false;
@@ -103,7 +103,7 @@ class Parser extends Obj {
   }
 
   advanceAfterBlockEnd(name) {
-    var tok;
+    let tok;
     if (!name) {
       tok = this.peekToken();
 
@@ -135,7 +135,7 @@ class Parser extends Obj {
   }
 
   advanceAfterVariableEnd() {
-    var tok = this.nextToken();
+    const tok = this.nextToken();
 
     if (tok && tok.type === lexer.TOKEN_VARIABLE_END) {
       this.dropLeadingWhitespace = tok.value.charAt(
@@ -148,9 +148,9 @@ class Parser extends Obj {
   }
 
   parseFor() {
-    var forTok = this.peekToken();
-    var node;
-    var endBlock;
+    const forTok = this.peekToken();
+    let node;
+    let endBlock;
 
     if (this.skipSymbol("for")) {
       node = new nodes.For(forTok.lineno, forTok.colno);
@@ -227,7 +227,7 @@ class Parser extends Obj {
   parseCall() {
     // a call block is parsed as a normal FunCall, but with an added
     // 'caller' kwarg which is a Caller node.
-    var callTok = this.peekToken();
+    const callTok = this.peekToken();
     if (!this.skipSymbol("call")) {
       this.fail("expected call");
     }
@@ -266,9 +266,9 @@ class Parser extends Obj {
   }
 
   parseWithContext() {
-    var tok = this.peekToken();
+    const tok = this.peekToken();
 
-    var withContext = null;
+    let withContext = null;
 
     if (this.skipSymbol("with")) {
       withContext = true;
@@ -290,7 +290,7 @@ class Parser extends Obj {
   }
 
   parseImport() {
-    var importTok = this.peekToken();
+    const importTok = this.peekToken();
     if (!this.skipSymbol("import")) {
       this.fail(
         "parseImport: expected import",
@@ -612,8 +612,8 @@ class Parser extends Obj {
   }
 
   parseStatement() {
-    var tok = this.peekToken();
-    var node;
+    const tok = this.peekToken();
+    let node;
 
     if (tok.type !== lexer.TOKEN_SYMBOL) {
       this.fail("tag name expected", tok.lineno, tok.colno);
@@ -777,7 +777,7 @@ class Parser extends Obj {
   }
 
   parseExpression() {
-    var node = this.parseInlineIf();
+    const node = this.parseInlineIf();
     return node;
   }
 
@@ -1090,7 +1090,7 @@ class Parser extends Obj {
   }
 
   parseFilterStatement() {
-    var filterTok = this.peekToken();
+    const filterTok = this.peekToken();
     if (!this.skipSymbol("filter")) {
       this.fail("parseFilterStatement: expected filter");
     }
@@ -1125,8 +1125,8 @@ class Parser extends Obj {
   }
 
   parseAggregate() {
-    var tok = this.nextToken();
-    var node;
+    const tok = this.nextToken();
+    let node;
 
     switch (tok.type) {
       case lexer.TOKEN_LEFT_PAREN:
@@ -1350,7 +1350,7 @@ class Parser extends Obj {
 
 export default {
   parse(src, extensions, opts) {
-    var p = new Parser(lexer.lex(src, opts));
+    const p = new Parser(lexer.lex(src, opts));
     if (extensions !== undefined) {
       p.extensions = extensions;
     }

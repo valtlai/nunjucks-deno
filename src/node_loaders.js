@@ -33,8 +33,8 @@ class FileSystemLoader extends Loader {
   }
 
   getSource(name) {
-    var fullpath = null;
-    var paths = this.searchPaths;
+    let fullpath = null;
+    const paths = this.searchPaths;
 
     for (let i = 0; i < paths.length; i++) {
       const basePath = path.resolve(paths[i]);
@@ -91,7 +91,7 @@ class NodeResolveLoader extends Loader {
 
     try {
       fullpath = require.resolve(name);
-    } catch (e) {
+    } catch (_) {
       return null;
     }
 

@@ -98,7 +98,7 @@ class Compiler extends Obj {
   }
 
   _withScopedSyntax(func) {
-    var _scopeClosers = this._scopeClosers;
+    const _scopeClosers = this._scopeClosers;
     this._scopeClosers = "";
 
     func.call(this);
@@ -108,7 +108,7 @@ class Compiler extends Obj {
   }
 
   _makeCallback(res) {
-    var err = this._tmpid();
+    const err = this._tmpid();
 
     return "function(" + err + (res ? "," + res : "") + ") {\n" +
       "if(" + err + ") { cb(" + err + "); return; }";
@@ -197,9 +197,9 @@ class Compiler extends Obj {
   }
 
   compileCallExtension(node, frame, async) {
-    var args = node.args;
-    var contentArgs = node.contentArgs;
-    var autoescape = typeof node.autoescape === "boolean"
+    const args = node.args;
+    const contentArgs = node.contentArgs;
+    const autoescape = typeof node.autoescape === "boolean"
       ? node.autoescape
       : true;
 
@@ -299,8 +299,8 @@ class Compiler extends Obj {
   }
 
   compileSymbol(node, frame) {
-    var name = node.value;
-    var v = frame.lookup(name);
+    const name = node.value;
+    const v = frame.lookup(name);
 
     if (v) {
       this._emit(v);
@@ -325,8 +325,8 @@ class Compiler extends Obj {
   }
 
   compilePair(node, frame) {
-    var key = node.key;
-    var val = node.value;
+    let key = node.key;
+    const val = node.value;
 
     if (key instanceof nodes.Symbol) {
       key = new nodes.Literal(key.lineno, key.colno, key.value);
@@ -371,7 +371,7 @@ class Compiler extends Obj {
   compileIs(node, frame) {
     // first, we need to try to get the name of the test function, if it's a
     // callable (i.e., has args) and not a symbol.
-    var right = node.right.name
+    const right = node.right.name
       ? node.right.name.value // otherwise go with the symbol value
       : node.right.value;
     this._emit('env.getTest("' + right + '").call(context, ');
@@ -515,7 +515,7 @@ class Compiler extends Obj {
   }
 
   compileFilter(node, frame) {
-    var name = node.name;
+    const name = node.name;
     this.assertType(name, nodes.Symbol);
     this._emit('env.getFilter("' + name.value + '").call(context, ');
     this._compileAggregate(node.args, frame);
@@ -523,8 +523,8 @@ class Compiler extends Obj {
   }
 
   compileFilterAsync(node, frame) {
-    var name = node.name;
-    var symbol = node.symbol.value;
+    const name = node.name;
+    const symbol = node.symbol.value;
 
     this.assertType(name, nodes.Symbol);
 
@@ -544,13 +544,13 @@ class Compiler extends Obj {
   }
 
   compileSet(node, frame) {
-    var ids = [];
+    const ids = [];
 
     // Lookup the variable names for each identifier and create
     // new ones if necessary
     node.targets.forEach((target) => {
-      var name = target.value;
-      var id = frame.lookup(name);
+      const name = target.value;
+      let id = frame.lookup(name);
 
       if (id === null || id === undefined) {
         id = this._tmpid();
@@ -574,8 +574,8 @@ class Compiler extends Obj {
     }
 
     node.targets.forEach((target, i) => {
-      var id = ids[i];
-      var name = target.value;
+      const id = ids[i];
+      const name = target.value;
 
       // We are running this for every var, but it's very
       // uncommon to assign to multiple vars anyway
@@ -597,7 +597,7 @@ class Compiler extends Obj {
     this._emit("switch (");
     this.compile(node.expr, frame);
     this._emit(") {");
-    node.cases.forEach((c, i) => {
+    node.cases.forEach((c) => {
       this._emit("case ");
       this.compile(c.cond, frame);
       this._emit(": ");
@@ -652,7 +652,7 @@ class Compiler extends Obj {
     this._addScopeLevel();
   }
 
-  _emitLoopBindings(node, arr, i, len) {
+  _emitLoopBindings(_0, _1, i, len) {
     const bindings = [
       { name: "index", val: `${i} + 1` },
       { name: "index0", val: i },
@@ -701,7 +701,7 @@ class Compiler extends Obj {
 
       // Bind each declared var
       node.name.children.forEach((child, u) => {
-        var tid = this._tmpid();
+        const tid = this._tmpid();
         this._emitLine(`var ${tid} = ${arr}[${i}][${u}];`);
         this._emitLine(`frame.set("${child}", ${arr}[${i}][${u}]);`);
         frame.set(node.name.children[u].value, tid);
@@ -770,10 +770,10 @@ class Compiler extends Obj {
     // worry about. This iterates across an object asynchronously,
     // but not in parallel.
 
-    var i = this._tmpid();
-    var len = this._tmpid();
-    var arr = this._tmpid();
-    var asyncMethod = parallel ? "asyncAll" : "asyncEach";
+    const i = this._tmpid();
+    const len = this._tmpid();
+    const arr = this._tmpid();
+    const asyncMethod = parallel ? "asyncAll" : "asyncEach";
     frame = frame.push();
 
     this._emitLine("frame = frame.push();");
@@ -848,10 +848,10 @@ class Compiler extends Obj {
   }
 
   _compileMacro(node, frame) {
-    var args = [];
-    var kwargs = null;
-    var funcId = "macro_" + this._tmpid();
-    var keepFrame = (frame !== undefined);
+    const args = [];
+    let kwargs = null;
+    const funcId = "macro_" + this._tmpid();
+    const keepFrame = (frame !== undefined);
 
     // Type check the definition of the args
     node.args.children.forEach((arg, i) => {
@@ -930,10 +930,10 @@ class Compiler extends Obj {
   }
 
   compileMacro(node, frame) {
-    var funcId = this._compileMacro(node);
+    const funcId = this._compileMacro(node);
 
     // Expose the macro to the templates
-    var name = node.name.value;
+    const name = node.name.value;
     frame.set(name, funcId);
 
     if (frame.parent) {
@@ -1000,9 +1000,9 @@ class Compiler extends Obj {
     this._addScopeLevel();
 
     node.names.children.forEach((nameNode) => {
-      var name;
-      var alias;
-      var id = this._tmpid();
+      let name;
+      let alias;
+      const id = this._tmpid();
 
       if (nameNode instanceof nodes.Pair) {
         name = nameNode.key.value;
@@ -1031,7 +1031,7 @@ class Compiler extends Obj {
   }
 
   compileBlock(node) {
-    var id = this._tmpid();
+    const id = this._tmpid();
 
     // If we are executing outside a block (creating a top-level
     // block), we really don't want to execute its code because it
@@ -1056,8 +1056,8 @@ class Compiler extends Obj {
   }
 
   compileSuper(node, frame) {
-    var name = node.blockName.value;
-    var id = node.symbol.value;
+    const name = node.blockName.value;
+    const id = node.symbol.value;
 
     const cb = this._makeCallback(id);
     this._emitLine(
@@ -1069,7 +1069,7 @@ class Compiler extends Obj {
   }
 
   compileExtends(node, frame) {
-    var k = this._tmpid();
+    const k = this._tmpid();
 
     const parentTemplateId = this._compileGetTemplate(node, frame, true, false);
 
@@ -1119,7 +1119,7 @@ class Compiler extends Obj {
   compileCapture(node, frame) {
     // we need to temporarily override the current buffer id as 'output'
     // so the set block writes to the capture output instead of the buffer
-    var buffer = this.buffer;
+    const buffer = this.buffer;
     this.buffer = "output";
     this._emitLine("(function() {");
     this._emitLine('var output = "";');
@@ -1182,7 +1182,7 @@ class Compiler extends Obj {
 
     const blocks = node.findAll(nodes.Block);
 
-    blocks.forEach((block, i) => {
+    blocks.forEach((block) => {
       const name = block.name.value;
 
       if (blockNames.indexOf(name) !== -1) {
@@ -1200,7 +1200,7 @@ class Compiler extends Obj {
 
     this._emitLine("return {");
 
-    blocks.forEach((block, i) => {
+    blocks.forEach((block) => {
       const blockName = `b_${block.name.value}`;
       this._emitLine(`${blockName}: ${blockName},`);
     });
@@ -1209,7 +1209,7 @@ class Compiler extends Obj {
   }
 
   compile(node, frame) {
-    var _compile = this["compile" + node.typename];
+    const _compile = this["compile" + node.typename];
     if (_compile) {
       _compile.call(this, node, frame);
     } else {

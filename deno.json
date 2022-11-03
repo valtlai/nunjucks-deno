@@ -3,5 +3,12 @@
     "options": {
       "proseWrap": "preserve"
     }
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-this-alias"
+      ]
+    }
   }
 }

@@ -11,13 +11,13 @@ function traverseAndCheck(obj, type, results) {
 }
 
 class Node extends Obj {
-  init(lineno, colno, ...args) {
+  init(lineno, colno) {
     this.lineno = lineno;
     this.colno = colno;
 
     this.fields.forEach((field, i) => {
       // The first two args are line/col numbers, so offset by 2
-      var val = arguments[i + 2];
+      let val = arguments[i + 2];
 
       // Fields should never be undefined, but null. It makes
       // testing easier to normalize values.
@@ -166,7 +166,7 @@ const CallExtensionAsync = CallExtension.extend("CallExtensionAsync");
 
 // This is hacky, but this is just a debugging function anyway
 function print(str, indent, inline) {
-  var lines = str.split("\n");
+  const lines = str.split("\n");
 
   lines.forEach((line, i) => {
     if (line && ((inline && i > 0) || !inline)) {
@@ -201,7 +201,7 @@ function printNodes(node, indent) {
       });
     }
   } else {
-    let nodes = [];
+    const nodes = [];
     let props = null;
 
     node.iterFields((val, fieldName) => {

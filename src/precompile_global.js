@@ -1,5 +1,5 @@
 export default function precompileGlobal(templates, opts) {
-  var out = "";
+  let out = "";
   opts = opts || {};
 
   for (let i = 0; i < templates.length; i++) {

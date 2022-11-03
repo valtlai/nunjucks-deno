@@ -277,7 +277,7 @@ exports.iterable = iterable;
  */
 function mapping(value) {
   // only maps and object hashes
-  var bool = value !== null &&
+  const bool = value !== null &&
     value !== undefined &&
     typeof value === "object" &&
     !Array.isArray(value);

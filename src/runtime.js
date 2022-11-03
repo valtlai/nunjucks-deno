@@ -1,6 +1,7 @@
 import * as lib from "./lib.js";
-var arrayFrom = Array.from;
-var supportsIterators = (
+
+const arrayFrom = Array.from;
+const supportsIterators = (
   typeof Symbol === "function" && Symbol.iterator &&
   typeof arrayFrom === "function"
 );
@@ -21,9 +22,9 @@ class Frame {
   set(name, val, resolveUp) {
     // Allow variables with dots by automatically creating the
     // nested structure
-    var parts = name.split(".");
-    var obj = this.variables;
-    var frame = this;
+    const parts = name.split(".");
+    let obj = this.variables;
+    let frame = this;
 
     if (resolveUp) {
       if ((frame = this.resolve(parts[0], true))) {
@@ -45,7 +46,7 @@ class Frame {
   }
 
   get(name) {
-    var val = this.variables[name];
+    const val = this.variables[name];
     if (val !== undefined) {
       return val;
     }
@@ -53,8 +54,8 @@ class Frame {
   }
 
   lookup(name) {
-    var p = this.parent;
-    var val = this.variables[name];
+    const p = this.parent;
+    const val = this.variables[name];
     if (val !== undefined) {
       return val;
     }
@@ -62,8 +63,8 @@ class Frame {
   }
 
   resolve(name, forWrite) {
-    var p = (forWrite && this.isolateWrites) ? undefined : this.parent;
-    var val = this.variables[name];
+    const p = (forWrite && this.isolateWrites) ? undefined : this.parent;
+    const val = this.variables[name];
     if (val !== undefined) {
       return this;
     }
@@ -81,9 +82,9 @@ class Frame {
 
 function makeMacro(argNames, kwargNames, func) {
   return function macro(...macroArgs) {
-    var argCount = numArgs(macroArgs);
-    var args;
-    var kwargs = getKeywordArgs(macroArgs);
+    const argCount = numArgs(macroArgs);
+    let args;
+    const kwargs = getKeywordArgs(macroArgs);
 
     if (argCount > argNames.length) {
       args = macroArgs.slice(0, argNames.length);
@@ -127,7 +128,7 @@ function isKeywordArgs(obj) {
 }
 
 function getKeywordArgs(args) {
-  var len = args.length;
+  const len = args.length;
   if (len) {
     const lastArg = args[len - 1];
     if (isKeywordArgs(lastArg)) {
@@ -138,7 +139,7 @@ function getKeywordArgs(args) {
 }
 
 function numArgs(args) {
-  var len = args.length;
+  const len = args.length;
   if (len === 0) {
     return 0;
   }
@@ -185,15 +186,15 @@ function copySafeness(dest, target) {
 }
 
 function markSafe(val) {
-  var type = typeof val;
+  const type = typeof val;
 
   if (type === "string") {
     return new SafeString(val);
   } else if (type !== "function") {
     return val;
   } else {
-    return function wrapSafe(args) {
-      var ret = val.apply(this, arguments);
+    return function wrapSafe() {
+      const ret = val.apply(this, arguments);
 
       if (typeof ret === "string") {
         return new SafeString(ret);
@@ -250,7 +251,7 @@ function callWrap(obj, name, context, args) {
 }
 
 function contextOrFrameLookup(context, frame, name) {
-  var val = frame.lookup(name);
+  const val = frame.lookup(name);
   return (val !== undefined) ? val : context.lookup(name);
 }
 
@@ -290,9 +291,9 @@ function asyncEach(arr, dimen, iter, cb) {
 }
 
 function asyncAll(arr, dimen, func, cb) {
-  var finished = 0;
-  var len;
-  var outputArr;
+  let finished = 0;
+  let len;
+  let outputArr;
 
   function done(i, output) {
     finished++;
