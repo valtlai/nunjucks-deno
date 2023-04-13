@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.4] (unreleased)
+- Ported the upstream version v3.2.4
+  - HTML encode backslashes when expressions are passed through the escape
+    filter (including when this is done automatically with autoescape). Merge
+    of [#1427](https://github.com/mozilla/nunjucks/pull/1427).
+
 ## [3.2.3-2] (2022-11-03)
 - Removed unsupported options from type declarations
 

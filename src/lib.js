@@ -7,9 +7,10 @@ const escapeMap = {
   "'": "&#39;",
   "<": "&lt;",
   ">": "&gt;",
+  "\\": "&#92;",
 };
 
-const escapeRegex = /[&"'<>]/g;
+const escapeRegex = /[&"'<>\\]/g;
 
 export function hasOwnProp(obj, k) {
   return ObjProto.hasOwnProperty.call(obj, k);
