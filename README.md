@@ -9,6 +9,15 @@ View the [docs](https://mozilla.github.io/nunjucks/).
 
 🦕 This is a port of [Nunjucks](https://github.com/mozilla/nunjucks) for Deno.
 
+## Deprecated
+
+❌ This module is deprecated.
+Please use the following instead:
+
+```js
+import nunjucks from "npm:nunjucks@VERSION_NUMBER";
+```
+
 ## Usage
 
 Import the module:

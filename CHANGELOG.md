@@ -1,7 +1,9 @@
 # Changelog
 
 ## [3.2.4] (unreleased)
-- Ported the upstream version v3.2.4
+- **Deprecated the module**, so this is the last version.
+  Please import `npm:nunjucks@VERSION_NUMBER` instead.
+- Ported the upstream version 3.2.4
   - HTML encode backslashes when expressions are passed through the escape
     filter (including when this is done automatically with autoescape). Merge
     of [#1427](https://github.com/mozilla/nunjucks/pull/1427).
