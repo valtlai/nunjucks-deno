@@ -851,7 +851,7 @@ class Compiler extends Obj {
     const args = [];
     let kwargs = null;
     const funcId = "macro_" + this._tmpid();
-    const keepFrame = (frame !== undefined);
+    const keepFrame = frame !== undefined;
 
     // Type check the definition of the args
     node.args.children.forEach((arg, i) => {

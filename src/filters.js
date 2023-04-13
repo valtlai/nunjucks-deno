@@ -580,7 +580,7 @@ function urlize(str, length, nofollow) {
     length = Infinity;
   }
 
-  const noFollowAttr = (nofollow === true ? ' rel="nofollow"' : "");
+  const noFollowAttr = nofollow === true ? ' rel="nofollow"' : "";
 
   const words = str.split(/(\s+)/).filter((word) => {
     // If the word has no length, bail. This can happen for str with

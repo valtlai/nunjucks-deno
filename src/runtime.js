@@ -1,10 +1,8 @@
 import * as lib from "./lib.js";
 
 const arrayFrom = Array.from;
-const supportsIterators = (
-  typeof Symbol === "function" && Symbol.iterator &&
-  typeof arrayFrom === "function"
-);
+const supportsIterators = typeof Symbol === "function" && Symbol.iterator &&
+  typeof arrayFrom === "function";
 
 // Frames keep track of scoping both at compile-time and run-time so
 // we know how to access variables. Block tags can introduce special
