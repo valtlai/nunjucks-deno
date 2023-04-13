@@ -23,5 +23,5 @@ import nunjucks from "npm:nunjucks@VERSION_NUMBER";
 Import the module:
 
 ```js
-import nunjucks from "https://deno.land/x/nunjucks@3.2.3-2/mod.js";
+import nunjucks from "https://deno.land/x/nunjucks@3.2.4/mod.js";
 ```
