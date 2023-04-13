@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.2.4] (unreleased)
+## [3.2.4] (2023-04-13)
 - **Deprecated the module**, so this is the last version.
   Please import `npm:nunjucks@VERSION_NUMBER` instead.
 - Ported the upstream version 3.2.4
